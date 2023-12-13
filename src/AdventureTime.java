@@ -11,6 +11,8 @@ public class AdventureTime {
     public static void main(String[] args) throws IOException {
 
         challengeOne("inputOneTwo.txt");
+        challengeTwo("inputOneTwo.txt");
+        challengeThree("inputThreeFour.txt");
 
 
     }
@@ -27,22 +29,24 @@ public class AdventureTime {
         File file = new File(fileName);
         Scanner scanner = new Scanner(file);
         int[] fileData = new int[2002];
+        int count = 0;
         int index = 0;
-        int result = 0;
 
-        while (scanner.hasNextLine() && index<2001) {
+        while (scanner.hasNextLine()) {
             fileData[index] = scanner.nextInt();
+            index++;
+        }
+        index = 0;
+        while(index<2001){
             int a = fileData[index];
             int b = fileData[index+1];
             if(b>a){
-                result++;
+                count++;
             }
-
-                index++;
-
+            index++;
         }
-        System.out.println(result);
-        return result;
+        System.out.println(count);
+        return count;
 
     }
 
@@ -55,8 +59,34 @@ public class AdventureTime {
      * @return Answer to Challenge 2
      * @throws FileNotFoundException
      */
-    /*public static int challengeTwo(String fileName) throws FileNotFoundException {
-        return 0;
+    public static int challengeTwo(String fileName) throws FileNotFoundException {
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
+        int[] fileData = new int[2002];
+        int count = 0;
+        int index = 0;
+
+        while (scanner.hasNextLine()) {
+            fileData[index] = scanner.nextInt();
+            index++;
+        }
+        index=0;
+        while(index<1999){
+            int a = fileData[index];
+            int b = fileData[index+1];
+            int c = fileData[index+2];
+            int d = fileData[index+3];
+
+            int firstSum = a+b+c;
+            int secondSum = b+c+d;
+
+            if(secondSum > firstSum){
+                count++;
+            }
+            index++;
+        }
+        System.out.println(count);
+        return count;
     }
 
     /** TODO 3
@@ -68,7 +98,42 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeThree(String fileName) throws FileNotFoundException {
-        return 0;
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
+        String[] fileData = new String[1000];
+        int horizontal = 0;
+        int vertical = 0;
+        int index = 0;
+
+        while (scanner.hasNextLine()) {
+            fileData[index] = scanner.nextLine();
+            index++;
+        }
+        index=0;
+        while(index<1000){
+            String a = fileData[index];
+            String b = a.trim();
+
+            if(b.equals("forward")){
+                String front = a.substring(8,9);
+                int f = Integer.parseInt(front);
+                horizontal += f;
+            }
+            if(b.equals("down")){
+                String frontTwo = a.substring(5,6);
+                int ft = Integer.parseInt(frontTwo);
+                vertical+=ft;
+            }
+
+            if(b.equals("up")){
+                String upOne = a.substring(3,4);
+                int upTwo = Integer.parseInt(upOne);
+                vertical+=upTwo;
+            }
+            index++;
+        }
+        System.out.println(horizontal*vertical);
+        return (horizontal*vertical);
     }
 
     /** TODO 4
