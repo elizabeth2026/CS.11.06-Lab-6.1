@@ -112,20 +112,21 @@ public class AdventureTime {
         index=0;
         while(index<1000){
             String a = fileData[index];
-            String b = a.trim();
 
-            if(b.equals("forward")){
+
+
+            if(a.substring(0,7).equals("forward")){
                 String front = a.substring(8,9);
                 int f = Integer.parseInt(front);
                 horizontal += f;
             }
-            if(b.equals("down")){
+            if(a.substring(0,5).equals("down")){
                 String frontTwo = a.substring(5,6);
                 int ft = Integer.parseInt(frontTwo);
                 vertical+=ft;
             }
 
-            if(b.equals("up")){
+            if(a.substring(0,3).equals("up")){
                 String upOne = a.substring(3,4);
                 int upTwo = Integer.parseInt(upOne);
                 vertical+=upTwo;
