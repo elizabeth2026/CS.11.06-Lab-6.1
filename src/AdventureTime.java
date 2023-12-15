@@ -130,7 +130,7 @@ public class AdventureTime {
             if(a.substring(0,1).equals("u")){
                 String upOne = a.substring(3,4);
                 int upTwo = Integer.parseInt(upOne);
-                vertical+=upTwo;
+                vertical-=upTwo;
             }
             index++;
         }
@@ -147,7 +147,48 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeFour(String filename) throws FileNotFoundException {
-        return 0;
+        File file = new File(filename);
+        Scanner scanner = new Scanner(file);
+        String[] fileData = new String[1000];
+        int horizontal = 0;
+        int vertical = 0;
+        int aim = 0;
+        int index = 0;
+
+        while (scanner.hasNextLine()) {
+            fileData[index] = scanner.nextLine();
+            index++;
+        }
+        index = 0;
+        while (index < 1000) {
+            String a = fileData[index];
+            String[] b = a.trim().split("//s+");
+
+            if (a.substring(0, 3).equals("dow")) {
+                String frontTwo = a.substring(5, 6);
+                int ft = Integer.parseInt(frontTwo);
+                aim += ft;
+                vertical += ft;
+            }
+
+            if (a.substring(0, 1).equals("u")) {
+                String upOne = a.substring(3, 4);
+                int upTwo = Integer.parseInt(upOne);
+                aim -= upTwo;
+                vertical -= upTwo;
+            }
+            if (a.substring(0, 3).equals("for")) {
+                String front = a.substring(8, 9);
+                int f = Integer.parseInt(front);
+                horizontal += f;
+                vertical += (aim * f);
+            }
+            index++;
+
+
+        }
+        System.out.println(horizontal * vertical);
+        return horizontal*vertical;
     }
 
     /** This method will write the values passed as challengeOne, challengeTwo, challengeThree, and challengeFour to a text file.
